@@ -5,9 +5,12 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , user = require('./routes/user')
   , http = require('http')
 	, store = new express.session.MemoryStore
   , path = require('path');
+
+var fs = require('fs');
 
 var app = express();
 
@@ -53,7 +56,18 @@ app.configure('development', function(){
 });
 
 app.locals.inspect = require('util').inspect;
+
+//this rule render server side
 app.get('/', routes.index);
+
+//this rule is rendered both, client and server
+app.get('/users', user.list);
+
+//this rule is for pure render side
+app.get('/client', function(request, response) {
+  var data = fs.readFileSync('client.html');
+  response.send(data.toString());
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -1,0 +1,16 @@
+<html>
+<head>
+<script src="/js/dust-core-2.0.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/dustviews/user.js"></script>
+</head>
+<body>
+<div id="pageContainer"></div>
+</body>
+</html>
+
+<script type="text/javascript">
+dust.render("user.dust", {firstName:'James', lastName:'Smith'} , function(err, out) {
+	$("#pageContainer").html(out);
+});
+</script>

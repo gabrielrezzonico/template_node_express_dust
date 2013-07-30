@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>{title}</title>
+<script src="/js/dust-core-2.0.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/dustviews/user.js"></script>
+</head>
+<body>
+<!-- this part is rendered server side -->
+<h1>{title}</h1>
+<p> This template is rendered client and server side! </p>
+
+<!-- and this is rendered client side -->
+<div id="pageContainer"></div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+dust.render("user.dust", {firstName:'James', lastName:'Smith'} , function(err, out) {
+$("#pageContainer").html(out);
+});
+});
+</script>
